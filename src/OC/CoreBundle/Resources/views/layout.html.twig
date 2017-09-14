@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			{% block title %}
+				OCSymfony
+			{% endblock %}
+		</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	</head>
+
+	<body>
+		<div class="container">
+			<div id="header" class="jumbotron" style="margin-top: 15px;">
+				<h1 style="font-size: 2.5em">
+					<a href="{{ path('oc_core_home') }}">
+						<strong>Ma plateforme d'annonces</strong>
+					</a>
+				</h1>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua.
+				</p>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-md-3">
+					<h3>
+						Navigation :
+					</h3>
+					<ul class="nav nav-pills nav-stacked">
+						<li>
+							<a href="{{ path('oc_core_home') }}">Accueil</a>
+						</li>
+						<li>
+							<a href="{{ path('oc_platform_add') }}">Ajouter une annonce</a>
+						</li>
+						<li>
+							<a href="{{ path('oc_core_contact') }}">Contact</a>
+						</li>
+					</ul>
+					<h3>
+						Dernières annonces :
+					</h3>
+					{{ render(controller("OCPlatformBundle:Advert:lastsAdds", {'limit': 3})) }}
+				</div>
+				<div class="col-md-9">
+					{% block body %}
+					{% endblock %}
+				</div>
+			</div>
+			<hr>
+			<footer>
+				<center>
+					<p>
+						{{ 'now'|date('Y') }} - <em>Impossible is nothing...</em>
+					</p>
+				</center>
+			</footer>
+		{% block javascripts %}
+	        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	    	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		{% endblock %}
+	</body>
+</html>

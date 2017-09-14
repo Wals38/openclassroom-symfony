@@ -1,0 +1,15 @@
+parameters:
+
+    creator: Walid
+
+
+
+
+services:
+
+  oc_platform.antispam:       # Nom du service qui sera accessible via $container->get('oc_platform.antispam')
+    class: OC\PlatformBundle\Antispam\OCAntispam     # Definition du namespace complet de la classe du service
+    arguments:
+      - "@mailer"
+      - %locale%
+      - 50

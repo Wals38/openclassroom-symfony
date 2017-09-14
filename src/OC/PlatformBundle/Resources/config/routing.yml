@@ -1,0 +1,57 @@
+# PREMIERS EXOS (HELLO WORLD) : #
+
+hello_world:                                                         # Nom de la route, sans importance mais doit être unique
+    path: /helloworld                                                # ENTREE = URL de la route
+    defaults: {_controller: OCPlatformBundle:Advert:hello, page: 1}  # SORTIE = Paramètres de la route Bundle:Controller:Action
+
+bye_world:                                         
+    path: /byeworld
+    defaults: {_controller: OCPlatformBundle:Advert:bye}
+
+
+
+# PARTIE PLATEFORME D'ANNONCES : #
+
+oc_platform_home:
+    path: /{page}
+    defaults: {_controller: OCPlatformBundle:Advert:index, page: 1}
+    requirements: 
+      page: \d*
+
+oc_platform_add:
+    path: /add
+    defaults: {_controller: OCPlatformBundle:Advert:add}
+
+oc_platform_date:
+    path: /{annee}/{mois}-{jour}
+    defaults: {_controller: OCPlatformBundle:Advert:date, jour: 01}
+    requirements:         # Contraites sur les parametres de la route
+      annee: \d{4}
+      mois: \d{2}         # \d impose un suite de chiffres, dont la longueur est indiquée entre crochets
+      jour: \d{2}
+
+oc_platform_view:
+    path: /advert/{id}/
+    defaults: {_controller: OCPlatformBundle:Advert:view}
+    requirements:
+      id: \d+             # Le + impose AU MOINS un chiffre
+
+oc_platform_edit:
+    path: /edit/{id}
+    defaults: {_controller: OCPlatformBundle:Advert:edit}
+    requirements:
+      id: \d+
+
+oc_platform_delete:
+    path: /delete/{id}
+    defaults: {_controller: OCPlatformBundle:Advert:delete}
+    requirements:
+      id: \d+
+
+oc_platform_redirect:
+  path: /advert/redirect
+  defaults: {_controller: OCPlatformBundle:Advert:redirect}
+
+oc_platform_add_redirect:
+    path: /addRedirect
+    defaults: {_controller: OCPlatformBundle:Advert:addRedirect}

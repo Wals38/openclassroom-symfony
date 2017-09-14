@@ -1,0 +1,26 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+
+{% block title %}
+
+	{{ parent() }} - Supprimer une annonce
+
+{% endblock %}
+
+{% block ocplatform_body %}
+
+	<h3>
+		Supprimer l'annonce {{advert.id}} : {{advert.title}} ?
+	<h3>
+
+	<p>
+    	<a href="{{ path('oc_platform_view', {'id': advert.id}) }}" class="btn btn-default">
+      		<span class="glyphicon glyphicon-chevron-left"></span>
+    	  	Retour à l'annonce
+    	</a>
+    	<a href="{{ path('oc_platform_delete', {'id': advert.id}) }}" class="btn btn-danger">
+			<span class="glyphicon glyphicon-trash"></span>
+			Confirmer la suppression
+		</a>
+  	</p>
+{% endblock %}
