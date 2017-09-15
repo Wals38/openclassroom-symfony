@@ -4,10 +4,12 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Advert
- *
- * @ORM\Table(name="advert")
  * @ORM\Entity(repositoryClass="OC\PlatformBundle\Repository\AdvertRepository")
+ * @ORM\Table(name="advert")
  */
+
+// Par defaut symfony nome la table comme l'entité, soit ici Advert (avec la majuscule) d'où l'interet preciser la difference plus haut avec l'annotation table
+
 class Advert {
 
     //_______________ ATTRIBUTS DE L'ENTITE : _______________//

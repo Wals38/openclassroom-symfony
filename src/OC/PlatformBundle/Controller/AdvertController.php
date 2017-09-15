@@ -68,7 +68,7 @@
 	    	$advert->setTitle('Titre 01');
 	    	$advert->setContent('Bla bla bla... [01]');
 	    	$advert->setAuthor('Author 01');
-	    	// Les attributs date et id sont definis automatiquement
+	    	// Les attributs date et id sont definis en dur pour le moment
 	    	$image = new Image();
 	    	$image->setUrl('http://sdz-upload.s3.amazonaws.com/prod/upload/job-de-reve.jpg');
 	    	$image->setAlt('Job de rêve');
