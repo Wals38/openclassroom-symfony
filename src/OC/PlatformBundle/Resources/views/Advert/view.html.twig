@@ -17,6 +17,24 @@
 		{{ advert.content }}
 	</div>
 
+	{% if listAdvertSkill is empty %}
+		<p class="help-block">
+			Aucunes compétences requises signalées par l'annonceur.
+		</p>
+	{% endif %}
+
+	{% if listAdvertSkill is not empty %}
+		<p class="help-block">
+			<strong>Compétences requises :</strong>
+			{% for skill in listAdvertSkill %}
+				{{ skill.name }}
+				{% if not loop.last %}
+					 - 
+				{% endif %}
+			{% endfor %}
+		</p>
+	{% endif %}
+
 	{% if not advert.categories.empty %}
 		<p class="help-block">
 			<strong>TAGs : </strong>

@@ -101,11 +101,13 @@
     			throw new NotFoundHttpException("Annonce " . $id . " introuvable.");
     		}
     		$listApplication = $bdd->getRepository('OCPlatformBundle:Application')->findBy(array('advert' => $advert));
+
 			$listAdvertSkill = $bdd->getRepository('OCPlatformBundle:AdvertSkill')->findBy(array('advert' => $advert));
+
     		return $this->render('OCPlatformBundle:Advert:view.html.twig', array(
    				'advert' => $advert,
-   				'listApplicationn' => $listApplication,
-   				'listAdvertsSkill' => $listAdvertSkill
+   				'listApplication' => $listApplication,
+   				'listAdvertSkill' => $listAdvertSkill
    			));
 		}
 

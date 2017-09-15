@@ -6,5 +6,5 @@ Cours OpenClassroom sur Symfony
 
 https://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-symfony
 
-## ATTENTION :
+### ATTENTION :
 Ne pas oublier de modifier le fichier parameters.yml pour indiquer la bonne BDD et les bons identifiants d'accès !
