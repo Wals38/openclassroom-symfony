@@ -21,7 +21,10 @@
 		<p class="help-block">
 			<strong>TAGs : </strong>
 			{% for category in advert.categories %}
-				#{{ category.name }}{% if not loop.last %} {% endif %}
+				<a href="">#{{ category.name }}</a>
+				{% if not loop.last %}
+					 - 
+				{% endif %}
 			{% endfor %}
 		</p>
 	{% endif %}
