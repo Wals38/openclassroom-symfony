@@ -27,7 +27,7 @@
 		<p class="help-block">
 			<strong>Compétences requises :</strong>
 			{% for skill in listAdvertSkill %}
-				{{ skill.name }}
+				{{ skill.skill.name }}
 				{% if not loop.last %}
 					 - 
 				{% endif %}

@@ -169,6 +169,15 @@
 	    	return Response('Okay !');
 	    }
 
+	    public function monthAdsAction() {
+	    	$bdd = $this->getDoctrine()->getManager();
+	    	$adverts = $bdd->getRepository('OCPlatformBundle:Advert');
+
+	    	$adverts = $adverts->whereCurrentMonth();
+
+	    	return $this->render('OCPlatformBundle:Advert:index.html.twig', array('listAdverts' => $adverts));
+	    }
+
 
 	    // AUTRES METHODES :
 

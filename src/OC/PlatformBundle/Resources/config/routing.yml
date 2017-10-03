@@ -55,3 +55,7 @@ oc_platform_redirect:
 oc_platform_add_redirect:
     path: /addRedirect
     defaults: {_controller: OCPlatformBundle:Advert:addRedirect}
+
+oc_platform_month:
+    path: /monthAds
+    defaults: {_controller: OCPlatformBundle:Advert:monthAds}

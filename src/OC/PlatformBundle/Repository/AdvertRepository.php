@@ -10,4 +10,48 @@ namespace OC\PlatformBundle\Repository;
  */
 class AdvertRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function myFindAll() {
+		$queryBuilder = $this->_em->createQueryBuilder()
+		-> select('a')
+		-> from ($this->_entityName, 'a'); 				// $this->_entityName correspond au namespace de l'entité (OC\PlatformBundle\Entity\Advert)
+	
+		$queryBuilder = $createQueryBuilder('a');		// 'a' est l'alias qu'on donne à l'entité dans laquelle on se trouve, par convention on utilise la premiere lettre de l'entité
+		// Même chose que plus haut, création de la requete
+
+		$query = $queryBuilder->getQuery();
+		// On recupere la query à partir du queryBuilder
+
+		$results = $query->getResult();
+		// On recupere le resultat à partir de la query
+
+		return $results;
+	}
+
+	public function myFindOne($id) {
+		$queryBuilder = $this->createQueryBuilder('a');
+
+		$queryBuilder->where('a.id = :idX')->setParameter('idX', $id);
+		// where : id de a = idX avec idX = $id
+
+		return $queryBuilder->getQuery()->getResult();
+	}
+
+	public function findByAuthor($author) {
+		$queryBuilder = $this->createQueryBuilder('a');
+
+		$queryBuilder->where('a.author = :authorX')->setParameter('authorX', $author)->orderBy('DESC');
+
+		return $queryBuilder->getQuery()->getResult();
+	}
+
+	public function whereCurrentMonth() {
+		$queryBuilder = $this->createQueryBuilder('a');
+
+		$month = new \Datetime();
+		$month = $month->format('Y-m');
+
+		$queryBuilder->where('a.date LIKE :month')->setParameter('month', '%'.$month.'%');
+
+		return $queryBuilder->getQuery()->getResult();
+	}
 }
