@@ -54,4 +54,24 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
 
 		return $queryBuilder->getQuery()->getResult();
 	}
+
+	public function getAdvertWithApplications() {
+		$queryBuilder = $this->createQueryBuilder('a')
+		->leftJoin('a.application', 'app')			// ->leftJoin('a.application', 'app', 'WITH', 'condition')
+		->addSelect('app');
+
+		return $queryBuilder->getQuery()->getResult();
+	}
+
+    public function getAdvertWithCategories(array $categoryNames) {
+    	$queryBuilder = $this->createQueryBuilder('a');
+
+    	$queryBuilder->InnerJoin('a.categories', 'c')->addSelect('c');
+    	// On fait une jointure avec l'entité Category avec pour alias 'c'
+
+    	$queryBuilder->where($queryBuilder->expr()->in('c.name', $categoryNames));
+    	//
+
+    	return $queryBuilder->getQuery()->getResult();
+    }
 }

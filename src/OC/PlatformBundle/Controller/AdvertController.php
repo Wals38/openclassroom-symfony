@@ -178,6 +178,16 @@
 	    	return $this->render('OCPlatformBundle:Advert:index.html.twig', array('listAdverts' => $adverts));
 	    }
 
+	    public function categoriesAction() {
+	    	$categories = ['Développeur', 'Intégrateur'];
+
+	    	$bdd = $this->getDoctrine()->getManager();
+	    	$adverts = $bdd->getRepository('OCPlatformBundle:Advert');
+	    	$listAdverts = $adverts->getAdvertWithCategories($categories);
+
+	    	return $this->render('OCPlatformBundle:Advert:categories.html.twig', array('listAdverts' => $listAdverts));
+	    }
+
 
 	    // AUTRES METHODES :
 

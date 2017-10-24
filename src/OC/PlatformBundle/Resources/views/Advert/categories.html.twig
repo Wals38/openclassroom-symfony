@@ -1,0 +1,42 @@
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	{{ parent() }} - Catégories
+{% endblock %}
+
+{% block ocplatform_body %}
+	<h3>
+		Catégories :
+	</h3>
+	<input type="text" class="form-control" id="cat1" placeholder="Catégorie 1" style="width: 45%; display: inline-block;">
+	<input type="text" class="form-control" id="cat2" placeholder="Catégorie 2" style="width: 45%; display: inline-block;">
+	<a href="{{ path('oc_platform_categories') }}">
+		<input type="button" class="btn btn-success" value="Go !" style="width: 8%">
+	</a>
+	
+	<hr>
+
+	{% if listAdverts is not empty %}
+		{{ dump(listAdverts) }}
+		<ul>
+			{% for advert in listAdverts %}
+				<li>
+					<strong>
+						<a href="">
+							{{ advert.title }}
+						</a>
+					</strong>
+					<p>
+						{{ advert.content }}
+					</p>
+				</li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<p>
+			Aucune annonce trouvée.
+			{{ dump(listAdverts) }}
+		</p>
+	{% endif %}
+
+{% endblock %}

@@ -19,10 +19,9 @@
 
 	{% if listAdvertSkill is empty %}
 		<p class="help-block">
-			Aucunes compétences requises signalées par l'annonceur.
+			L'annonceur n'a renseigné aucune compétence requise.
 		</p>
 	{% endif %}
-
 	{% if listAdvertSkill is not empty %}
 		<p class="help-block">
 			<strong>Compétences requises :</strong>
@@ -35,6 +34,11 @@
 		</p>
 	{% endif %}
 
+	{% if advert.categories is empty %}
+		<p class="help-block">
+			L'annonceur n'a renseigné aucune catégorie pour son annonce.
+		</p>
+	{% endif %}
 	{% if not advert.categories.empty %}
 		<p class="help-block">
 			<strong>TAGs : </strong>
@@ -46,6 +50,22 @@
 			{% endfor %}
 		</p>
 	{% endif %}
+
+	<div>
+		{% if listApplication is not empty %}
+			<h3>Candidature(s) :</h3>
+			<ul>
+				{% for app in listApplication %}
+					<li>
+						<h4>{{ app.author }}</h4>
+						<p>
+							{{ app.content }}
+						</p>
+					</li>
+				{% endfor %}
+			</ul>
+		{% endif %}	
+	</div>
 
 	<div>
 		<a href="{{ path('oc_platform_home') }}" class="btn btn-default">

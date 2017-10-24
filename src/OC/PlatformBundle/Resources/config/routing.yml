@@ -59,3 +59,7 @@ oc_platform_add_redirect:
 oc_platform_month:
     path: /monthAds
     defaults: {_controller: OCPlatformBundle:Advert:monthAds}
+
+oc_platform_categories:
+    path: /categories
+    defaults: {_controller: OCPlatformBundle:Advert:categories}
