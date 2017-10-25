@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Advert
  * @ORM\Entity(repositoryClass="OC\PlatformBundle\Repository\AdvertRepository")
  * @ORM\Table(name="advert")
+ * @ORM\HasLifecyleCallbacks()
  */
 
 // Par defaut symfony nome la table comme l'entité, soit ici Advert (avec la majuscule) d'où l'interet preciser la difference plus haut avec l'annotation table
@@ -52,9 +53,14 @@ class Advert {
     private $author;
 
     /**
+     * @ORM\Column (name="updatedAt", type="datetime")
+     */
+    private $updatedAt;
+
+    /**
      * @var boolean
      *
-     * @ORM\Column (name="published", type="boolean")
+     * @ORM\Column (name="published", type="boolean", nullable=true)
      */
     private $published = true;
 
@@ -91,6 +97,16 @@ class Advert {
     }
 
 
+
+
+    //___________________ CALLBACKS : ___________________//
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateDate() {
+        $this->setUpdateAt(new \Datetime());
+    }
 
 
 
