@@ -5,8 +5,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Advert
  * @ORM\Entity(repositoryClass="OC\PlatformBundle\Repository\AdvertRepository")
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="advert")
- * @ORM\HasLifecyleCallbacks()
  */
 
 // Par defaut symfony nome la table comme l'entité, soit ici Advert (avec la majuscule) d'où l'interet preciser la difference plus haut avec l'annotation table
@@ -105,7 +105,7 @@ class Advert {
      * @ORM\PreUpdate
      */
     public function updateDate() {
-        $this->setUpdateAt(new \Datetime());
+        $this->setUpdatedAt(new \Datetime());
     }
 
 
@@ -335,5 +335,29 @@ class Advert {
     public function getApplications()
     {
         return $this->applications;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Advert
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

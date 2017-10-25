@@ -5,6 +5,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Advert
  * @ORM\Entity(repositoryClass="OC\PlatformBundle\Repository\AdvertRepository")
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="advert")
  */
 
@@ -52,9 +53,14 @@ class Advert {
     private $author;
 
     /**
+     * @ORM\Column (name="updatedAt", type="datetime")
+     */
+    private $updatedAt;
+
+    /**
      * @var boolean
      *
-     * @ORM\Column (name="published", type="boolean")
+     * @ORM\Column (name="published", type="boolean", nullable=true)
      */
     private $published = true;
 
@@ -91,6 +97,16 @@ class Advert {
     }
 
 
+
+
+    //___________________ CALLBACKS : ___________________//
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateDate() {
+        $this->setUpdateAt(new \Datetime());
+    }
 
 
 
@@ -282,5 +298,42 @@ class Advert {
     public function getCategories()
     {
         return $this->categories;
+    }
+
+    /**
+     * Add application
+     *
+     * @param \OC\PlatformBundle\Entity\Application $application
+     *
+     * @return Advert
+     */
+    public function addApplication(\OC\PlatformBundle\Entity\Application $application)
+    {
+        $this->applications[] = $application;
+
+        $application->setAdvert($this);
+        // On lie l'annonce à la candidature
+        
+        return $this;
+    }
+
+    /**
+     * Remove application
+     *
+     * @param \OC\PlatformBundle\Entity\Application $application
+     */
+    public function removeApplication(\OC\PlatformBundle\Entity\Application $application)
+    {
+        $this->applications->removeElement($application);
+    }
+
+    /**
+     * Get applications
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getApplications()
+    {
+        return $this->applications;
     }
 }
