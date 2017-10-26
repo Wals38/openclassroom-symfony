@@ -55,7 +55,7 @@ class Advert {
     /**
      * @ORM\Column (name="updatedAt", type="datetime", nullable=true)
      */
-    private $updatedAt;
+    private $updatedAt = null;
 
     /**
      * @var boolean
@@ -64,6 +64,10 @@ class Advert {
      */
     private $published = true;
 
+    /**
+     * @ORM\Column (name="nbApplications", type="integer")
+     */
+    private $nbApplications = 0;
 
 
 
@@ -106,6 +110,18 @@ class Advert {
      */
     public function updateDate() {
         $this->setUpdatedAt(new \Datetime());
+    }
+
+
+
+    //_______________ AUTRES FONCTIONS : _______________//
+    
+    public function increaseApp() {
+        $this->nbApplications++;
+    }
+
+    public function decreaseApp() {
+        $this->nbApplications--;
     }
 
 
@@ -359,5 +375,29 @@ class Advert {
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set nbApplications
+     *
+     * @param integer $nbApplications
+     *
+     * @return Advert
+     */
+    public function setNbApplications($nbApplications)
+    {
+        $this->nbApplications = $nbApplications;
+
+        return $this;
+    }
+
+    /**
+     * Get nbApplications
+     *
+     * @return integer
+     */
+    public function getNbApplications()
+    {
+        return $this->nbApplications;
     }
 }
