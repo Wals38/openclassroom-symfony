@@ -2,12 +2,11 @@
 	Formulaire :
 </h3>
 
-<form class="well" method="POST" action="#">
+<form class="well" method="POST" action="{{path('oc_platform_edit2', {'id': advert.id})}}">
 	<div class="form-group" style="margin-bottom: 30px">
-		<input type="text" name="title" placeholder="Titre..." class="form-control">
-		<textarea name="content" placeholder="Votre annonce..." class="form-control" style="margin-top: 5px;"></textarea>
+		<input type="text" name="title" placeholder="Nouveau titre..." class="form-control" value="{{advert.title}}">
+		<textarea name="content" placeholder="Votre nouvelle annonce..." class="form-control" style="margin-top: 5px;">{{advert.content}}</textarea>
 		
-		<input type="submit" name="Go !" class="btn btn-success pull-right" style="margin-top: 5px;">
-
+		<input type="submit" class="btn btn-success pull-right" style="margin-top: 5px;">
 	</div>
 </form>

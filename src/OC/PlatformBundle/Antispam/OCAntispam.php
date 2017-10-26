@@ -16,7 +16,7 @@
 		}
 
 		public function isSpam ($text) {
-			if (strlen($text)<$this->minLength) {
+			if (strlen($text)<5) {
 				return true;
 			} else {
 				return false;

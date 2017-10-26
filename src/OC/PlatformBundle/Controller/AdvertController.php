@@ -63,33 +63,6 @@
 	    	return $this->render('OCPlatformBundle:Advert:index.html.twig', array('listAdverts' => $listAdverts));
 	    }
 
-	    public function addAction (Request $request) {
-	    	$advert = new Advert();
-	    	$advert->setTitle('Titre 01');
-	    	$advert->setContent('Bla bla bla... [01]');
-	    	$advert->setAuthor('Author 01');
-	    	// Les attributs date et id sont definis en dur pour le moment
-	    	$image = new Image();
-	    	$image->setUrl('http://sdz-upload.s3.amazonaws.com/prod/upload/job-de-reve.jpg');
-	    	$image->setAlt('Job de rêve');
-	    	// Création et remplissage de l'objet $image qu'on passera à l'objet $advert
-	    	$advert->setImage($image);
-	    	// Passage de l'objet $image à l'objet $advert
-	    	$bdd = $this->getDoctrine()->getManager();
-	    	// On recupere l'EntityManager
-	    	$bdd->persist($advert);
-	    	// Envois de l'annonce à Doctrine
-	    	$bdd->flush();
-	    	// Sauvegarde dans la bdd
-	    	$antispam = $this->container->get('oc_platform.antispam');
-	    	// Recuperation du service
-	    	$text = "Message de test (<50 char)<br>Message de test (<50 char)<br>Message de test (<50 char)<br>Message de test (<50 char)<br>Message de test (<50 char)";
-	    	if ($antispam->isSpam($text)) {
-	    		throw new \Exception("Votre message a potentiellement été detecté comme spam !", 1);
-	    	}
-	    	return $this->redirectToRoute('oc_platform_view', array ('id' => $advert->getId()));
-	    }
-
 	    public function dateAction($annee, $mois, $jour) {
 	    	return new Response("Affichage de l'annonce datée du <em>" . $jour . '/' . $mois . '/' . $annee . "</em>.");
 	    }
@@ -111,33 +84,91 @@
    			));
 		}
 
+	    public function addAction () {
+	    	return $this->render('OCPlatformBundle:Advert:add.html.twig');	    	
+	    }
+
+	    public function add2Action (Request $request) {
+	    	$advert = new Advert();
+	    	$advert->setTitle($request->request->get('title'));
+	    	$advert->setContent($request->request->get('content'));
+	    	$advert->setAuthor('Author Admin');
+	    	// L'attribut author est defini en dur pour le moment
+	    	$image = new Image();
+	    	$image->setUrl('http://sdz-upload.s3.amazonaws.com/prod/upload/job-de-reve.jpg');
+	    	$image->setAlt('Job de rêve');
+	    	// Création et remplissage de l'objet $image qu'on passera à l'objet $advert
+	    	$advert->setImage($image);
+	    	// Passage de l'objet $image à l'objet $advert
+	    	$bdd = $this->getDoctrine()->getManager();
+	    	// On recupere l'EntityManager
+	    	$bdd->persist($advert);
+	    	// Envois de l'annonce à Doctrine
+
+	    	$antispam = $this->container->get('oc_platform.antispam');
+	    	// Recuperation du service
+	    	if ($antispam->isSpam($request->request->get('content'))) {
+	    		throw new \Exception("Votre message a potentiellement été detecté comme spam ! (<5 char)", 1);
+	    	} else {
+	    		$bdd->flush();
+	    		// Sauvegarde dans la bdd
+	    	}
+	    	return $this->redirectToRoute('oc_platform_view', array ('id' => $advert->getId()));
+	    }
+
 	    public function editAction ($id, Request $request) {
 	    	$bdd = $this->getDoctrine()->getManager();
-	    	$advert = $bdd->getRepository('OCPlatformBundle:Advert')->find($id);
+			$advert = $bdd->getRepository('OCPlatformBundle:Advert')->find($id);
 	    	if ($advert == null) {
-	    		throw new Exception("Annonce " . $id . "introuvable.");	    		
+	    		throw new NotFoundHttpException("Annonce " . $id . "introuvable.");	    		
 	    	}
-	    	$categories = $bdd->getRepository('OCPlatformBundle:Category')->findAll();
-	    	// Recupere toutes les catégories de la BDD (table category)
-	    	foreach ($categories as $cat) {
-	    		$advert->addCategory($cat);
-	    	} // Ajoute toutes les categories de $categories à $advert
-	    	$bdd->flush();
-	    	// Enregistre dans la BDD
 	    	return $this->render('OCPlatformBundle:Advert:edit.html.twig', array('advert' => $advert));
+	    }
+
+	    public function edit2Action ($id, Request $request) {
+	    	$bdd = $this->getDoctrine()->getManager();
+			$advert = $bdd->getRepository('OCPlatformBundle:Advert')->find($id);
+	    	if ($advert == null) {
+	    		throw new NotFoundHttpException("Annonce " . $id . "introuvable.");	    		
+	    	}
+
+	    	$advert->setTitle($request->request->get('title'));
+	    	$advert->setContent($request->request->get('content'));
+
+	    	$bdd->persist($advert);
+
+	    	$antispam = $this->container->get('oc_platform.antispam');
+	    	// Recuperation du service
+	    	if ($antispam->isSpam($request->request->get('content'))) {
+	    		throw new \Exception("Votre message a potentiellement été detecté comme spam ! (<5 char)", 1);
+	    	} else {
+	    		$bdd->flush();
+	    		// Sauvegarde dans la bdd
+	    	}
+
+	    	return $this->redirectToRoute('oc_platform_view', array ('id' => $advert->getId()));
 	    }
  
 	    public function deleteAction ($id) {
 	    	$bdd = $this->getDoctrine()->getManager();
 	    	$advert = $bdd->getRepository('OCPlatformBundle:Advert')->find($id);
 	    	if ($advert == null) {
-	    		throw new NotFounudHttpException("Annonce " . $id . " introuvable.");
+	    		throw new NotFoundHttpException("Annonce " . $id . " introuvable.");
 	    	}
-	    	foreach ($advert->getCategories() as $cat) {
-	    		$advert->removeCategory($cat);
-	    	}
-	    	$bdd->flush();
 	    	return $this->render('OCPlatformBundle:Advert:delete.html.twig', array('advert' => $advert));
+	    }
+ 
+	    public function delete2Action ($id, Request $request) {
+	    	$bdd = $this->getDoctrine()->getManager();
+	    	$advert = $bdd->getRepository('OCPlatformBundle:Advert')->find($id);
+
+	    	$bdd->remove($advert);
+	    	$bdd->flush();
+
+	    	$session = $request->getSession();
+    		$session->getFlashBag()->add('info', 'Message flash : Votre annonce a bien été supprimée.');
+
+	    	return $this->redirectToRoute('oc_core_home');
 	    }
 
 	    public function redirectAction() {	

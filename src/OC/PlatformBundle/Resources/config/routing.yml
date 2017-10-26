@@ -22,10 +22,14 @@ oc_platform_add:
     path: /add
     defaults: {_controller: OCPlatformBundle:Advert:add}
 
+oc_platform_add2:
+    path: /add2
+    defaults: {_controller: OCPlatformBundle:Advert:add2}
+
 oc_platform_date:
     path: /{annee}/{mois}-{jour}
     defaults: {_controller: OCPlatformBundle:Advert:date, jour: 01}
-    requirements:         # Contraites sur les parametres de la route
+    requirements:         # Contraintes sur les parametres de la route
       annee: \d{4}
       mois: \d{2}         # \d impose un suite de chiffres, dont la longueur est indiquée entre crochets
       jour: \d{2}
@@ -42,9 +46,21 @@ oc_platform_edit:
     requirements:
       id: \d+
 
+oc_platform_edit2:
+    path: /edit2/{id}
+    defaults: {_controller: OCPlatformBundle:Advert:edit2}
+    requirements:
+      id: \d+
+
 oc_platform_delete:
     path: /delete/{id}
     defaults: {_controller: OCPlatformBundle:Advert:delete}
+    requirements:
+      id: \d+
+
+oc_platform_delete2:
+    path: /delete2/{id}
+    defaults: {_controller: OCPlatformBundle:Advert:delete2}
     requirements:
       id: \d+
 

@@ -4,12 +4,12 @@
 	{{ parent () }} - Déposer une annonce
 {% endblock %}
 
-{% block body %}
+{% block ocplatform_body %}
 	<h2>
 		Ajouter une annonce :
 	</h2>
-	<p class="text-warning">
-		<strong class="bg-warning" style="padding: 5px; color: black;">Attention :</strong> Cette annonce sera ajoutée directement sur la page d'accueil après validation du formulaire.
-	</p>
 	{{ include("OCPlatformBundle:Advert:form.html.twig") }}
+	<p class="text-warning">
+		<strong class="bg-warning" style="padding: 5px; color: black;">Attention :</strong>Cette annonce sera ajoutée directement sur la page d'accueil après validation du formulaire.
+	</p>
 {% endblock %}
