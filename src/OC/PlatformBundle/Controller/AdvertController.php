@@ -10,7 +10,7 @@
 	use OC\PlatformBundle\Entity\Image;										// Importation de l'entité Image
 	use OC\PlatformBundle\Entity\Skill;
 	use OC\PlatformBundle\Entity\AdvertSkill;
-	use OC\PlatformBundle\Entity\Application;
+	use OC\PlatformBundle\Entity\Application;
 
 
 	// La classe doit hériter de Controller pour utiliser la méthode get()
@@ -113,6 +113,8 @@
 	    		$bdd->flush();
 	    		// Sauvegarde dans la bdd
 	    	}
+
+
 	    	return $this->redirectToRoute('oc_platform_view', array ('id' => $advert->getId()));
 	    }
 
