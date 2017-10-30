@@ -1,4 +1,4 @@
-# Openclassroom : Symfony
+# Openclassroom : tests Symfony
 
 A Symfony project created on April 3, 2017, 2:01 pm.
 
