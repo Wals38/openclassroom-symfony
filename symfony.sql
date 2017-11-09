@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Client :  127.0.0.1
--- Généré le :  Mer 25 Octobre 2017 à 14:42
--- Version du serveur :  5.7.14
--- Version de PHP :  7.0.10
+-- Hôte : 127.0.0.1:3306
+-- Généré le :  jeu. 09 nov. 2017 à 15:40
+-- Version du serveur :  5.7.19
+-- Version de PHP :  7.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -26,43 +28,48 @@ SET time_zone = "+00:00";
 -- Structure de la table `advert`
 --
 
-CREATE TABLE `advert` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `advert`;
+CREATE TABLE IF NOT EXISTS `advert` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `date` datetime NOT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `content` longtext COLLATE utf8_unicode_ci NOT NULL,
   `author` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `published` tinyint(1) DEFAULT NULL,
   `image_id` int(11) NOT NULL,
-  `updatedAt` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `updatedAt` datetime DEFAULT NULL,
+  `nbApplications` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_54F1F40B3DA5256D` (`image_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `advert`
+-- Déchargement des données de la table `advert`
 --
 
-INSERT INTO `advert` (`id`, `date`, `title`, `content`, `author`, `published`, `image_id`, `updatedAt`) VALUES
-(1, '2017-05-09 11:58:12', 'Titre 01', 'Bla bla bla... [01]', 'Author 01', 1, 14, '0000-00-00 00:00:00'),
-(2, '2017-05-09 11:58:14', 'Titre 02', 'Bla bla bla... [02]', 'Author 02', 1, 15, '0000-00-00 00:00:00'),
-(3, '2017-05-09 11:58:15', 'Titre 03', 'Bla bla bla... [03]', 'Author 03', 1, 16, '0000-00-00 00:00:00'),
-(4, '2017-05-09 11:58:16', 'Titre 04', 'Bla bla bla... [04]', 'Author 04', 1, 17, '0000-00-00 00:00:00'),
-(5, '2017-05-09 11:58:18', 'Titre 05', 'Bla bla bla... [05]', 'Author 05', 1, 18, '0000-00-00 00:00:00'),
-(6, '2017-05-09 11:58:20', 'Titre 06', 'Bla bla bla... [06]', 'Author 06', 1, 19, '0000-00-00 00:00:00'),
-(7, '2017-05-09 11:58:21', 'Titre 07', 'Bla bla bla... [07]', 'Author 06', 1, 20, '0000-00-00 00:00:00'),
-(8, '2017-05-09 12:00:58', 'Titre 08', 'Bla bla bla... [08]', 'Author 08', 1, 21, '0000-00-00 00:00:00'),
-(9, '2017-05-09 12:01:00', 'Titre 09', 'Bla bla bla... [09]', 'Author 09', 1, 22, '0000-00-00 00:00:00'),
-(10, '2017-09-14 14:30:56', 'Titre 10', 'Bla bla bla... [10]', 'Author 10', 1, 23, '0000-00-00 00:00:00'),
-(11, '2017-10-04 14:37:37', 'Titre 11', 'Bla bla bla... [11]', 'Author 11', 1, 24, '0000-00-00 00:00:00'),
-(12, '2017-10-15 07:44:52', 'Titre 12', 'Bla bla bla... [12]', 'Author 12', 1, 25, '0000-00-00 00:00:00'),
-(13, '2017-10-15 09:22:39', 'Titre 13', 'Bla bla bla... [13]', 'Author 13', 1, 26, '0000-00-00 00:00:00'),
-(14, '2017-10-02 09:06:25', 'Titre 01', 'Bla bla bla... [01]', 'Author 01', 1, 27, '0000-00-00 00:00:00'),
-(15, '2017-10-02 09:29:13', 'Titre 01', 'Bla bla bla... [01]', 'Author 01', 1, 28, '0000-00-00 00:00:00'),
-(16, '2017-10-02 09:42:20', 'Titre 01', 'Bla bla bla... [01]', 'Author 01', 1, 29, '0000-00-00 00:00:00'),
-(17, '2017-10-02 11:18:48', 'Titre 01', 'Bla bla bla... [01]', 'Author 01', 1, 30, '0000-00-00 00:00:00'),
-(18, '2017-10-02 11:19:14', 'Titre 01', 'Bla bla bla... [01]', 'Author 01', 1, 31, '2017-10-25 12:41:13'),
-(19, '2017-10-25 11:31:28', 'Titre 01', 'Bla bla bla... [01]', 'Author 01', 1, 32, '2017-10-25 12:39:28'),
-(20, '2017-10-25 11:32:41', 'Titre 01', 'Bla bla bla... [01]', 'Author 01', 1, 33, '2017-10-25 12:26:41'),
-(21, '2017-10-25 14:35:19', 'Titre 01', 'Bla bla bla... [01]', 'Author 01', 1, 40, '2017-10-25 14:35:27');
+INSERT INTO `advert` (`id`, `date`, `title`, `content`, `author`, `published`, `image_id`, `updatedAt`, `nbApplications`) VALUES
+(1, '2017-05-09 11:58:12', 'Titre 01', 'Bla bla bla... [01]', 'Author 01', 1, 14, '0000-00-00 00:00:00', 0),
+(2, '2017-05-09 11:58:14', 'Titre 02', 'Bla bla bla... [02]', 'Author 02', 1, 15, '0000-00-00 00:00:00', 0),
+(3, '2017-05-09 11:58:15', 'Titre 03', 'Bla bla bla... [03]', 'Author 03', 1, 16, '0000-00-00 00:00:00', 0),
+(4, '2017-05-09 11:58:16', 'Titre 04', 'Bla bla bla... [04]', 'Author 04', 1, 17, '0000-00-00 00:00:00', 0),
+(5, '2017-05-09 11:58:18', 'Titre 05', 'Bla bla bla... [05]', 'Author 05', 1, 18, '0000-00-00 00:00:00', 0),
+(6, '2017-05-09 11:58:20', 'Titre 06', 'Bla bla bla... [06]', 'Author 06', 1, 19, '0000-00-00 00:00:00', 0),
+(7, '2017-05-09 11:58:21', 'Titre 07', 'Bla bla bla... [07]', 'Author 06', 1, 20, '0000-00-00 00:00:00', 0),
+(8, '2017-05-09 12:00:58', 'Titre 08', 'Bla bla bla... [08]', 'Author 08', 1, 21, '0000-00-00 00:00:00', 0),
+(9, '2017-05-09 12:01:00', 'Titre 09', 'Bla bla bla... [09]', 'Author 09', 1, 22, '0000-00-00 00:00:00', 0),
+(10, '2017-09-14 14:30:56', 'Titre 10', 'Bla bla bla... [10]', 'Author 10', 1, 23, '0000-00-00 00:00:00', 0),
+(11, '2017-10-04 14:37:37', 'Titre 11', 'Bla bla bla... [11]', 'Author 11', 1, 24, '0000-00-00 00:00:00', 0),
+(12, '2017-10-15 07:44:52', 'Titre 12', 'Bla bla bla... [12]', 'Author 12', 1, 25, '0000-00-00 00:00:00', 0),
+(13, '2017-10-15 09:22:39', 'Titre 13', 'Bla bla bla... [13]', 'Author 13', 1, 26, '0000-00-00 00:00:00', 0),
+(14, '2017-10-02 09:06:25', 'Titre 01', 'Bla bla bla... [01]', 'Author 01', 1, 27, '0000-00-00 00:00:00', 0),
+(15, '2017-10-02 09:29:13', 'Titre 01', 'Bla bla bla... [01]', 'Author 01', 1, 28, '0000-00-00 00:00:00', 0),
+(16, '2017-10-02 09:42:20', 'Titre 01', 'Bla bla bla... [01]', 'Author 01', 1, 29, '0000-00-00 00:00:00', 0),
+(17, '2017-10-02 11:18:48', 'Titre 01', 'Bla bla bla... [01]', 'Author 01', 1, 30, '0000-00-00 00:00:00', 0),
+(18, '2017-10-02 11:19:14', 'Titre 01', 'Bla bla bla... [01]', 'Author 01', 1, 31, '2017-10-25 12:41:13', 0),
+(19, '2017-10-25 11:31:28', 'Titre 01', 'Bla bla bla... [01]', 'Author 01', 1, 32, '2017-10-25 12:39:28', 0),
+(20, '2017-10-25 11:32:41', 'Titre 01', 'Bla bla bla... [01]', 'Author 01', 1, 33, '2017-10-25 12:26:41', 0),
+(21, '2017-10-25 14:35:19', 'Titre 01', 'Bla bla bla... [01]', 'Author 01', 1, 40, '2017-10-25 14:35:27', 0),
+(22, '2017-11-09 15:39:35', 'test20171109', 'Annonce test postée le jeudi 09 nov 2017 à 1639', 'Author Admin', 1, 41, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -70,13 +77,17 @@ INSERT INTO `advert` (`id`, `date`, `title`, `content`, `author`, `published`, `
 -- Structure de la table `advert_category`
 --
 
-CREATE TABLE `advert_category` (
+DROP TABLE IF EXISTS `advert_category`;
+CREATE TABLE IF NOT EXISTS `advert_category` (
   `advert_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL
+  `category_id` int(11) NOT NULL,
+  PRIMARY KEY (`advert_id`,`category_id`),
+  KEY `IDX_84EEA340D07ECCB6` (`advert_id`),
+  KEY `IDX_84EEA34012469DE2` (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `advert_category`
+-- Déchargement des données de la table `advert_category`
 --
 
 INSERT INTO `advert_category` (`advert_id`, `category_id`) VALUES
@@ -114,15 +125,19 @@ INSERT INTO `advert_category` (`advert_id`, `category_id`) VALUES
 -- Structure de la table `advert_skill`
 --
 
-CREATE TABLE `advert_skill` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `advert_skill`;
+CREATE TABLE IF NOT EXISTS `advert_skill` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `advert_id` int(11) NOT NULL,
   `skill_id` int(11) NOT NULL,
-  `level` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `level` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_5619F91BD07ECCB6` (`advert_id`),
+  KEY `IDX_5619F91B5585C142` (`skill_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `advert_skill`
+-- Déchargement des données de la table `advert_skill`
 --
 
 INSERT INTO `advert_skill` (`id`, `advert_id`, `skill_id`, `level`) VALUES
@@ -137,16 +152,19 @@ INSERT INTO `advert_skill` (`id`, `advert_id`, `skill_id`, `level`) VALUES
 -- Structure de la table `application`
 --
 
-CREATE TABLE `application` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `application`;
+CREATE TABLE IF NOT EXISTS `application` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `advert_id` int(11) NOT NULL,
   `author` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `content` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_A45BDDC1D07ECCB6` (`advert_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `application`
+-- Déchargement des données de la table `application`
 --
 
 INSERT INTO `application` (`id`, `advert_id`, `author`, `content`, `date`) VALUES
@@ -162,13 +180,15 @@ INSERT INTO `application` (`id`, `advert_id`, `author`, `content`, `date`) VALUE
 -- Structure de la table `category`
 --
 
-CREATE TABLE `category` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE IF NOT EXISTS `category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `category`
+-- Déchargement des données de la table `category`
 --
 
 INSERT INTO `category` (`id`, `name`) VALUES
@@ -184,14 +204,16 @@ INSERT INTO `category` (`id`, `name`) VALUES
 -- Structure de la table `image`
 --
 
-CREATE TABLE `image` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `image`;
+CREATE TABLE IF NOT EXISTS `image` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `alt` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `alt` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `image`
+-- Déchargement des données de la table `image`
 --
 
 INSERT INTO `image` (`id`, `url`, `alt`) VALUES
@@ -215,7 +237,8 @@ INSERT INTO `image` (`id`, `url`, `alt`) VALUES
 (31, 'http://sdz-upload.s3.amazonaws.com/prod/upload/job-de-reve.jpg', 'Job de rêve'),
 (32, 'http://sdz-upload.s3.amazonaws.com/prod/upload/job-de-reve.jpg', 'Job de rêve'),
 (33, 'http://sdz-upload.s3.amazonaws.com/prod/upload/job-de-reve.jpg', 'Job de rêve'),
-(40, 'http://sdz-upload.s3.amazonaws.com/prod/upload/job-de-reve.jpg', 'Job de rêve');
+(40, 'http://sdz-upload.s3.amazonaws.com/prod/upload/job-de-reve.jpg', 'Job de rêve'),
+(41, 'http://sdz-upload.s3.amazonaws.com/prod/upload/job-de-reve.jpg', 'Job de rêve');
 
 -- --------------------------------------------------------
 
@@ -223,13 +246,15 @@ INSERT INTO `image` (`id`, `url`, `alt`) VALUES
 -- Structure de la table `skill`
 --
 
-CREATE TABLE `skill` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+DROP TABLE IF EXISTS `skill`;
+CREATE TABLE IF NOT EXISTS `skill` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `skill`
+-- Déchargement des données de la table `skill`
 --
 
 INSERT INTO `skill` (`id`, `name`) VALUES
@@ -243,93 +268,7 @@ INSERT INTO `skill` (`id`, `name`) VALUES
 (21, 'Bloc-note');
 
 --
--- Index pour les tables exportées
---
-
---
--- Index pour la table `advert`
---
-ALTER TABLE `advert`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQ_54F1F40B3DA5256D` (`image_id`);
-
---
--- Index pour la table `advert_category`
---
-ALTER TABLE `advert_category`
-  ADD PRIMARY KEY (`advert_id`,`category_id`),
-  ADD KEY `IDX_84EEA340D07ECCB6` (`advert_id`),
-  ADD KEY `IDX_84EEA34012469DE2` (`category_id`);
-
---
--- Index pour la table `advert_skill`
---
-ALTER TABLE `advert_skill`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_5619F91BD07ECCB6` (`advert_id`),
-  ADD KEY `IDX_5619F91B5585C142` (`skill_id`);
-
---
--- Index pour la table `application`
---
-ALTER TABLE `application`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_A45BDDC1D07ECCB6` (`advert_id`);
-
---
--- Index pour la table `category`
---
-ALTER TABLE `category`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `image`
---
-ALTER TABLE `image`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `skill`
---
-ALTER TABLE `skill`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT pour les tables exportées
---
-
---
--- AUTO_INCREMENT pour la table `advert`
---
-ALTER TABLE `advert`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
---
--- AUTO_INCREMENT pour la table `advert_skill`
---
-ALTER TABLE `advert_skill`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT pour la table `application`
---
-ALTER TABLE `application`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT pour la table `category`
---
-ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
---
--- AUTO_INCREMENT pour la table `image`
---
-ALTER TABLE `image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
---
--- AUTO_INCREMENT pour la table `skill`
---
-ALTER TABLE `skill`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
---
--- Contraintes pour les tables exportées
+-- Contraintes pour les tables déchargées
 --
 
 --
@@ -357,6 +296,7 @@ ALTER TABLE `advert_skill`
 --
 ALTER TABLE `application`
   ADD CONSTRAINT `FK_A45BDDC1D07ECCB6` FOREIGN KEY (`advert_id`) REFERENCES `advert` (`id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
