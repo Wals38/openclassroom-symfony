@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 09 nov. 2017 à 15:40
+-- Généré le :  ven. 24 nov. 2017 à 15:57
 -- Version du serveur :  5.7.19
--- Version de PHP :  7.1.9
+-- Version de PHP :  5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `advert` (
   `nbApplications` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_54F1F40B3DA5256D` (`image_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `advert`
@@ -69,7 +69,8 @@ INSERT INTO `advert` (`id`, `date`, `title`, `content`, `author`, `published`, `
 (19, '2017-10-25 11:31:28', 'Titre 01', 'Bla bla bla... [01]', 'Author 01', 1, 32, '2017-10-25 12:39:28', 0),
 (20, '2017-10-25 11:32:41', 'Titre 01', 'Bla bla bla... [01]', 'Author 01', 1, 33, '2017-10-25 12:26:41', 0),
 (21, '2017-10-25 14:35:19', 'Titre 01', 'Bla bla bla... [01]', 'Author 01', 1, 40, '2017-10-25 14:35:27', 0),
-(22, '2017-11-09 15:39:35', 'test20171109', 'Annonce test postée le jeudi 09 nov 2017 à 1639', 'Author Admin', 1, 41, NULL, 0);
+(22, '2017-11-09 15:39:35', 'test20171109', 'Annonce test postée le jeudi 09 nov 2017 à 1639', 'Author Admin', 1, 41, NULL, 0),
+(23, '2017-11-13 14:44:29', 'test20171113', 'Bla bla bla... Bla bla bla... Bla bla bla... Bla bla bla... Bla bla bla... Bla bla bla... Bla bla bla...!!', 'Author Admin', 1, 42, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -210,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `image` (
   `url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `alt` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `image`
@@ -238,7 +239,8 @@ INSERT INTO `image` (`id`, `url`, `alt`) VALUES
 (32, 'http://sdz-upload.s3.amazonaws.com/prod/upload/job-de-reve.jpg', 'Job de rêve'),
 (33, 'http://sdz-upload.s3.amazonaws.com/prod/upload/job-de-reve.jpg', 'Job de rêve'),
 (40, 'http://sdz-upload.s3.amazonaws.com/prod/upload/job-de-reve.jpg', 'Job de rêve'),
-(41, 'http://sdz-upload.s3.amazonaws.com/prod/upload/job-de-reve.jpg', 'Job de rêve');
+(41, 'http://sdz-upload.s3.amazonaws.com/prod/upload/job-de-reve.jpg', 'Job de rêve'),
+(42, 'http://sdz-upload.s3.amazonaws.com/prod/upload/job-de-reve.jpg', 'Job de rêve');
 
 -- --------------------------------------------------------
 

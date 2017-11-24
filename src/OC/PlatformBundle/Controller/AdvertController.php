@@ -220,8 +220,4 @@
 
 	    	return $this->render('OCPlatformBundle:Advert:categories.html.twig', array('listAdverts' => $listAdverts));
 	    }
-
-
-	    // AUTRES METHODES :
-
 	}
