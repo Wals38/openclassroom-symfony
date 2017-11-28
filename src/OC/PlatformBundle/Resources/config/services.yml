@@ -5,19 +5,19 @@ parameters:
 
 services:
 
-  oc_platform.antispam:       # Nom du service qui sera accessible via $container->get('oc_platform.antispam')
-    class: OC\PlatformBundle\Antispam\OCAntispam     # Definition du namespace complet de la classe du service
+  oc_platform.antispam:                               # Nom du service qui sera accessible via $container->get('oc_platform.antispam')
+    class: OC\PlatformBundle\Antispam\OCAntispam      # Definition du namespace complet de la classe du service
     arguments:
       - "@mailer"
       - %locale%
       - 5
 
-  oc_platform.email.application_mailer:
+  oc_platform.email.application_mailer:               # Service servant à envoyer un mail depuis une application (candidature) 
       class: OC\PlatformBundle\Email\ApplicationMailer
       arguments:
           - "@mailer"
 
-  oc_platform.doctrine_listener.application_creation:
+  oc_platform.doctrine_listener.application_creation: # 
     class: OC\PlatformBundle\DoctrineListener\ApplicationCreationListener
     arguments:
       - "@oc_platform.email.application_mailer"

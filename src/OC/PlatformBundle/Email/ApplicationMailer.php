@@ -24,10 +24,8 @@ class ApplicationMailer
       'Vous avez reçu une nouvelle candidature.'
     );
 
-    $message
-      ->addTo($application->getAdvert()->getAuthor()) // Ici bien sûr il faudrait un attribut "email", j'utilise "author" à la place
-      ->addFrom('admin@votresite.com')
-    ;
+    $message->addTo($application->getAdvert()->getAuthor())->addFrom('admin@votresite.com');
+    // getAuthor devra être à terme remplacé par getEmail
 
     $this->mailer->send($message);
   }
